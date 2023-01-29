@@ -1,0 +1,7 @@
+textarea{
+    resize: none !important;
+  }
+  .toast-style{
+    min-width: auto!important;
+    width: auto!important;
+  }
