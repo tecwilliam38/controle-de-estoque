@@ -20,7 +20,7 @@ export default function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [msgTipo, setMsgTipo] = useState();
+    const [msgTipo, setMsgTipo] = useState("");
     const [user, setUser] = useState('');
     const dispatch = useDispatch();
 
@@ -44,13 +44,13 @@ export default function Login() {
         <>
             <div className='card-content box'>
                 <ToastContainer
-                className='toast-style'
+                    className='toast-style'
                     closeOnClick
                     position="top-center" />
                 <div className=" text-center text-light">
                     <main className="form-signin form-cadastroUser shadow px-5 pt-2 rounded bd-radius">
                         <form className="form-signin mx-auto text-light">
-                            <div className="text-center mb-4">                                
+                            <div className="text-center mb-4">
                                 <h1 className="h3 my-3 font-weight-bold">Login</h1>
                             </div>
                             <input
@@ -68,8 +68,8 @@ export default function Login() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
 
-                            <button className="btn-block btn text-light btn-lg btn-secondary btn-login my-md-2" 
-                            type="button" onClick={handleLogar}>Sign in</button>
+                            <button className="btn-block btn text-light btn-lg btn-secondary btn-login my-md-2"
+                                type="button" onClick={handleLogar}>Sign in</button>
                             <div className="opcoes-login mt-5 text-center">
                                 {/* <p className="h5 mt-md-1 mb-1 text-light text-center navbar-link">Esqueceu a <a className="cad-user navbar-link" href='#'>senha</a> para se cadastrar</p>
                             <p className="h5 mt-md-1 mb-1 text-light text-center navbar-link">Ou clique <a className="cad-user navbar-link" href='/cadastroUser'>aqui</a> para se cadastrar</p> */}
@@ -77,12 +77,11 @@ export default function Login() {
                     <p className="h5 mt-md-1 mb-1 text-light text-center navbar-link">Ou clique <Link className="cad-user navbar-link" to="/cadastroUser">aqui</Link> para se cadastrar</p> */}
                             </div>
                             <div className='text-center text-light h3'>
-                                {
-                                        msgTipo === 'sucesso'
+                                {/* {
+                                    msgTipo === 'sucesso'
                                         ? <span className='h5 shadow-text text-light py-3 mb-1 mb-md-2'><strong>Aguarde você será direcionado...</strong></span>
-                                        :
-                                        <span className='h5 shadow-text text-light py-3 mb-1 mb-md-2'><strong>Ops!</strong> Verifique a senha.</span>
-                                }
+                                        : <span className='h5 shadow-text text-light py-3 mb-1 mb-md-2'><strong>Ops!</strong> Verifique a senha.</span>
+                                } */}
                             </div>
                             <div className="opcoes-login text-center">
                                 {/* <Link to="/usuariorecuperarsenha" className="mx-2"  >Recuperar Senha</Link> */}

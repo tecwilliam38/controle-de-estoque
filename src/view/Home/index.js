@@ -13,7 +13,7 @@ export default function Home({ user }) {
             <div className='bg-login'>
                 <Menu />
                 <section className='container mt-3'>
-                    <div className="jumbotron">
+                    <div className="jumbotron bg-table-home">
                         <h1 className="display-4">Bem vindo(a): <div className='h3'>{usuarioEmail}.</div></h1>
                         <p className="lead">Este sistema está  em fase de desnvolvimento e testes.</p>
                         <hr className="my-4" />

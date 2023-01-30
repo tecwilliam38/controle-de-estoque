@@ -43,8 +43,8 @@ const CadastroPc = () => {
                     closeOnClick
                     position="top-center" />
                 <Menu />
-                <div className='py-2 container rounded'>
-                    <div className="row bg-dark px-3">
+                <div className='py-2 mt-2 rounded-top bg-table-cadastro container'>
+                    <div className="row px-3">
                         <div className="col pb-3">
                             <label for="inputEmail4" className='text-light px-1 py-2'>Asset</label>
                             <input type="text" className="form-control" placeholder="Asset"
@@ -66,7 +66,7 @@ const CadastroPc = () => {
                             </select>
                         </div>
                     </div>
-                    <div className="row bg-dark pb-3 px-3">
+                    <div className="row pb-3 px-3">
                         <div className="col pb-3">
                             <label for="inputEmail4" className='text-light px-1 py-2'>Usuário</label>
                             <input type="text" className="form-control" placeholder="Usuário"
@@ -96,7 +96,7 @@ const CadastroPc = () => {
                                 maxLength={500}
                             />
                         </div>
-                        <div className="col bg-dark">
+                        <div className="col">
                             {/* <label for="inputEmail4" className='text-light px-1'></label> */}
                             <button onClick={handleCadastro} className='btn-block btn btn-primary mt-5 btn-lg ml-1'>Enviar</button>
                         </div>

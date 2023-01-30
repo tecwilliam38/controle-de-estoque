@@ -6,6 +6,9 @@ import  {firestoreDb, auth} from '../../firebaseConfig/index';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
+import api from "../../services/apimongodb";
+
 import './style.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
@@ -21,61 +24,33 @@ export default function Cadastro() {
     const [carregando, setCarregando] = useState();
     const [msgTipo, setMsgTipo] = useState();
     const [msg, setMsg] = useState('');
-    const [id, setId] = useState(0);
+    const [skill, setSkill] = useState("");
     const [email, setEmail] = useState();
     const [user, setUser] = useState("");
-    const [empresa, setEmpresa] = useState("");
+    const [company, setCompany] = useState("");
     const [phone, setPhone] = useState("");
-    const [responsavel, setResponsavel] = useState("");
-    const [password, setPassword] = useState();
+    const [ceo, setCeo] = useState("");
+    const [passWord, setPassWord] = useState('');
 
-    const handleCadastroUser = (e) => {
-        e.preventDefault();
-        const uuid = uid();
-        setMsgTipo(null);
-        // setCarregando(1);
-        if (!user || !responsavel || !email || !password) {
+    const handleCadastroUser = (e) => {      
+        if (!user || !ceo || !email || !passWord) {
             setMsgTipo("erro");
             setMsg('Verifique os campos em branco...');
             return;
         }
-         createUserWithEmailAndPassword(auth, email, password)
-        // O trecho abaixo comentado é para cadastrar o usuário no realtime database 
-         // set(ref(db, 'users/' + `/${uuid}`), {
-            const postRef = collection(firestoreDb, 'user');      
-            addDoc(postRef,{                   
-            user: user,
-            company: empresa,
-            phone: phone,
-            ceo: responsavel,
-            id,
-            uuid
-        }).then(resultado => {
-            toast("Bem vindo!\n\t" + email );
-            setCarregando(0);
-            setMsgTipo("sucesso");
-            setId(id + 1);
-            navigate('/');
-        }).catch(erro => {
-            setCarregando(0);
-            setMsgTipo("erro");
-            toast("Erro!\n" + email);
-            switch (erro.message) {
-                case 'Firebase: Password should be at least 6 characters (auth/weak-password).':
-                    setMsg("A senha deve ter pelo menos 6 caracteres");
-                    break;
-                case 'Firebase: Error (auth/email-already-in-use).':
-                    setMsg('O email informado está em uso');
-                    break;
-                case 'Firebase: Error (auth/invalid-email).':
-                    setMsg('O formato de email é inválido');
-                    break;
-                default:
-                    setMsg('Não foi possível realizar o cadastro, tente novamente mais tarde');
-                    break;
-
-            }
-        });
+       const response = api.post("/cadastrousuario", {
+                user,
+                company,
+                phone,
+                ceo,
+                skill,
+                mail: email,
+                passWord,
+            })
+            toast("Cadastro efetuado com sucesso!"+email);
+            setTimeout(() => {
+                navigate('/home', user);
+            }, 3000)        
     }
 
     return (
@@ -83,6 +58,7 @@ export default function Cadastro() {
             <div className='card-content box'>
                 <ToastContainer
                     position='top-center'
+                    className="toast-style"
                     closeOnClick />
                 <div className=" text-center text-light">
                     <main className="form-signin form-cadastroUser shadow px-5 pt-2 rounded bd-radius">
@@ -101,8 +77,8 @@ export default function Cadastro() {
                                 className="form-control my-2 text-dark"
                                 // id="floatingInput"
                                 placeholder="Empresa em que trabalha"
-                                value={empresa}
-                                onChange={(e) => setEmpresa(e.target.value)}
+                                value={company}
+                                onChange={(e) => setCompany(e.target.value)}
                             />
                             <input
                                 type="text"
@@ -117,14 +93,22 @@ export default function Cadastro() {
                                 className="form-control my-2 text-dark"
                                 // id="floatingInput"
                                 placeholder="Gestor responsável"
-                                value={responsavel}
-                                onChange={(e) => setResponsavel(e.target.value)}
+                                value={ceo}
+                                onChange={(e) => setCeo(e.target.value)}
+                            />
+                            <input
+                                type="text"
+                                className="form-control my-2 text-dark"
+                                // id="floatingInput"
+                                placeholder="Função exercida"
+                                value={skill}
+                                onChange={(e) => setSkill(e.target.value)}
                             />
                             <input
                                 type="email"
                                 className="form-control my-2 text-dark"
-                                // id="floatingInput"
                                 placeholder="Digite seu email corporativo"
+                                value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                             <input
@@ -132,7 +116,8 @@ export default function Cadastro() {
                                 className="form-control my-2"
                                 id="floatingPassword"
                                 placeholder="Password"
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={passWord}
+                                onChange={(e) => setPassWord(e.target.value)}
                             />
                             {
                                 carregando ? <div className="spinner-border text-danger" role="status">

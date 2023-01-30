@@ -66,8 +66,8 @@ const ConsultaPc = () => {
                 <Menu />
                 {data.map((item) => (
                     <>
-                        <div className='py-2 container border-radius' key={item.id}>
-                            <div className="row bg-dark px-3">
+                        <div className='py-2 container bg-table-cadastro rounded my-2' key={item.id}>
+                            <div className="row px-3">
                                 <div className="col pb-3">
                                     <label for="inputEmail4" className='text-light px-1 py-2'>Asset</label>
                                     <input type="text" className="form-control" placeholder="Asset"
@@ -88,7 +88,7 @@ const ConsultaPc = () => {
                                     </select>
                                 </div>
                             </div>
-                            <div className="row bg-dark pb-3 px-3">
+                            <div className="row pb-3 px-3">
                                 <div className="col pb-3">
                                     <label for="inputEmail4" className='text-light px-1 py-2'>Usuário</label>
                                     <input type="text" className="form-control" placeholder="Usuário"
@@ -116,7 +116,7 @@ const ConsultaPc = () => {
                                     <textarea type='text' rows={1} className='form-control' placeholder='Observação'
                                         value={item.msg} onChange={(e) => setMsg(e.target.value)} />
                                 </div>
-                                <div className="col bg-dark d-flex justify-content-around">
+                                <div className="col d-flex justify-content-around">
                                     <button type='submit' 
                                     className='btn btn-block btn-danger mt-5 btn-lg ml-1'
                                     onClick={()=> handleDelete(item._id)}
