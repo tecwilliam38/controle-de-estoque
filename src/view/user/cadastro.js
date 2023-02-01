@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { uid } from 'uid';
-import  {firestoreDb, auth} from '../../firebaseConfig/index';
+import { auth } from '../../firebaseConfig/index';
+import { useDispatch } from 'react-redux';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,14 +13,11 @@ import './style.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 // import { set, ref, doc, child, update, push } from 'firebase/database';
-import {
-    collection,
-    addDoc,
-} from 'firebase/firestore';
 
 
 export default function Cadastro() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [carregando, setCarregando] = useState();
     const [msgTipo, setMsgTipo] = useState();
     const [msg, setMsg] = useState('');
@@ -32,25 +29,30 @@ export default function Cadastro() {
     const [ceo, setCeo] = useState("");
     const [passWord, setPassWord] = useState('');
 
-    const handleCadastroUser = (e) => {      
+    const handleCadastroUser = (e) => {
         if (!user || !ceo || !email || !passWord) {
             setMsgTipo("erro");
             setMsg('Verifique os campos em branco...');
             return;
         }
-       const response = api.post("/cadastrousuario", {
-                user,
-                company,
-                phone,
-                ceo,
-                skill,
-                mail: email,
-                passWord,
-            })
-            toast("Cadastro efetuado com sucesso!"+email);
-            setTimeout(() => {
-                navigate('/home', user);
-            }, 3000)        
+        createUserWithEmailAndPassword(auth, email, passWord);
+        api.post("/cadastrousuario", {
+            user,
+            company,
+            phone,
+            ceo,
+            skill,
+            email,
+            passWord,
+        })
+        toast("Cadastro efetuado com sucesso!" + email);
+        setUser({ id: '1', usuarioEmail: email });
+        setTimeout(() => {
+            setCarregando(true);
+            navigate('/home');
+        }, 3000)
+        dispatch({ type: 'LOG_IN', usuarioEmail: email });
+
     }
 
     return (
@@ -83,7 +85,7 @@ export default function Cadastro() {
                             <input
                                 type="text"
                                 className="form-control my-2 text-dark"
-                                // id="floatingInput"
+                                maxLength={16}
                                 placeholder="Telefone com DDD"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}

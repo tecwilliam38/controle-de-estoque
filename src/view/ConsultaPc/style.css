@@ -1,3 +1,43 @@
 .border-css{
     border-radius: 18px!important;
 }
+.modal{
+    min-width: 90vw!important;
+    width: 100vw!important;
+    max-width: 100%;
+}
+/* @media (min-width: 600px){
+.modal-dialog {
+    max-width: 80vw!important;
+    margin: 1.75rem auto;
+}}
+
+
+@include media-breakpoint-up(sm) {
+   
+    .modal-dialog {
+      max-width: $modal-md;
+      margin: $modal-dialog-margin-y-sm-up auto;
+    }
+  
+    .modal-dialog-centered {
+      min-height: calc(100% - (#{$modal-dialog-margin-y-sm-up} * 2));
+  
+      &::before {
+        height: calc(100vh - (#{$modal-dialog-margin-y-sm-up} * 2));
+      }
+  
+    }
+  
+    .modal-content {
+      @include box-shadow($modal-content-box-shadow-sm-up);
+    }
+  
+    .modal-sm { max-width: $modal-sm; }
+  
+  }
+  
+  @include media-breakpoint-up(lg) {
+    .modal-lg { max-width: $modal-lg; }
+  }
+   */
