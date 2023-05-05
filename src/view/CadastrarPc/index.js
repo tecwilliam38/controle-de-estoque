@@ -45,13 +45,13 @@ const CadastroPc = () => {
                 <Menu />
                 <div className='py-2 mt-2 rounded-top bg-table-cadastro container'>
                     <div className="row px-3">
-                        <div className="col pb-3">
+                        <div className="col col-lg-3 col-6 pb-3">
                             <label for="inputEmail4" className='text-light px-1 py-2'>Asset</label>
                             <input type="text" className="form-control" placeholder="Asset"
                                 maxLength={13}
                                 value={asset} onChange={(e) => setAsset(e.target.value)} />
                         </div>
-                        <div className="col pb-3">
+                        <div className="col col-6 pb-3">
                             <label for="inputEmail4" className='text-light px-1 py-2'>Service tag</label>
                             <input type="text" className="form-control"
                                 placeholder="Service tag" maxLength={15}
@@ -66,13 +66,13 @@ const CadastroPc = () => {
                             </select>
                         </div>
                     </div>
-                    <div className="row pb-3 px-3">
-                        <div className="col pb-3">
+                    <div className="row pb-3 px-3 d-flex justify-content-center">
+                        <div className="col col-6 pb-3">
                             <label for="inputEmail4" className='text-light px-1 py-2'>Usuário</label>
                             <input type="text" className="form-control" placeholder="Usuário"
                                 value={user} onChange={(e) => setUser(e.target.value)} />
                         </div>
-                        <div className="col pb-3">
+                        <div className="col col-6 pb-3">
                             <label for="inputEmail4" className='text-light px-1 py-2'>Estado</label>
                             <select className="form-control" id="exampleFormControlSelect1"
                                 value={status} onChange={(e) => setStatus(e.target.value)}>
@@ -87,17 +87,14 @@ const CadastroPc = () => {
                             </select>
                         </div>
                         <div className="col pb-3">
-                            <label for="inputEmail4" className='text-light px-1 py-2'>Observação</label>
-                            {/* <input type="text" className="form-control" placeholder="Asset"
-                                value={msg} onChange={(e) => setMsg(e.target.value)} /> */}
+                            <label for="inputEmail4" className='text-light col-12 px-1 py-2'>Observação</label>
                             <textarea type='text'
                                 rows={1} className='form-control' placeholder='Observação'
                                 value={msg} onChange={(e) => setMsg(e.target.value)}
                                 maxLength={500}
                             />
                         </div>
-                        <div className="col">
-                            {/* <label for="inputEmail4" className='text-light px-1'></label> */}
+                        <div className="col col-12">
                             <button onClick={handleCadastro} className='btn-block btn btn-primary mt-5 btn-lg ml-1'>Enviar</button>
                         </div>
                     </div>
