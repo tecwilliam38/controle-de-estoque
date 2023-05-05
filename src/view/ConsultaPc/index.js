@@ -210,10 +210,10 @@ const ConsultaPc = () => {
                                                     <option>Inativo</option>
                                                     <option>Nenhum...</option>
                                                 </select>
-                                                {status === "Garantia" ?
+                                                {result.status === "Garantia" ?
                                                     <>
                                                         <select className="form-control" id="exampleFormControlSelect1"
-                                                            value={garantia} onChange={(e) => setGarantia(e.target.value)}>
+                                                            value={result.garantia} onChange={(e) => setGarantia(e.target.value)}>
                                                             <option selected>Selecionar</option>
                                                             <option>Sim</option>
                                                             <option>Não</option>
@@ -222,10 +222,10 @@ const ConsultaPc = () => {
                                                     : ""
                                                 }
                                                 {
-                                                    status === "Reservado" ?
+                                                    result.status === "Reservado" ?
                                                         <>
                                                             <select className="form-control" id="exampleFormControlSelect1"
-                                                                value={reservado} onChange={(e) => setReservado(e.target.value)}>
+                                                                value={result.reservado} onChange={(e) => setReservado(e.target.value)}>
                                                                 <option selected>Selecionar</option>
                                                                 <option>Sim</option>
                                                                 <option>Não</option>
