@@ -18,45 +18,50 @@ const UpdatePc = () => {
     const [disp, setDisp] = useState("");
     const [user, setUser] = useState("");
     const [status, setStatus] = useState("");
+    const [garantia, setGarantia] = useState("");
+    const [reservado, setReservado] = useState("");
     const [msg, setMsg] = useState("");
     const [data, setData] = useState([]);
-    const {id} = useParams();
+    const { id } = useParams();
     const [itemUpdate, setItemUpdate] = useState([])
 
     useEffect(() => {
         async function getAllPcs() {
             const response = await api.get(`/cadastroPc/${id}`)
             setAsset(response.data.asset);
-            setMsg(response.data.msg)
-            setUser(response.data.user)
-            setServiceTag(response.data.serviceTag)
-            setDisp(response.data.disp)
-            setStatus(response.data.status)
-
+            setMsg(response.data.msg);
+            setUser(response.data.user);
+            setServiceTag(response.data.serviceTag);
+            setDisp(response.data.disp);
+            setStatus(response.data.status);
+            setReservado(response.data.reservado);
+            setGarantia(response.data.garantia);
         }
         getAllPcs();
     }, [])
 
 
-    const updatePcSelected = async(e)=>{
-            e.preventDefault();
-            try {
-              await api.put(`/cadastroPc/${id}`, {
+    const updatePcSelected = async (e) => {
+        e.preventDefault();
+        try {
+            await api.put(`/cadastroPc/${id}`, {
                 asset,
                 disp,
                 msg,
                 serviceTag,
                 user,
-                status
-              });
-              toast("registro atualizado com sucesso!");
-              setTimeout(() => {
+                status,
+                reservado,
+                garantia
+            });
+            toast("registro atualizado com sucesso!");
+            setTimeout(() => {
                 navigate('/home', user);
             }, 3000);
-            } catch (error) {
-              console.log(error);
-            }
-          };
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
 
 
@@ -71,14 +76,6 @@ const UpdatePc = () => {
                     position="top-center" />
                 <Menu />
                 <div className="row bg-table-cadastro m-2 d-flex justify-content-around">
-                    {/* <div className="col-2 border-right border-dark">
-                        <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <a className="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Consultar equipamento</a>
-                            <div className="col pb-3">
-                                <label for="inputEmail4" className='text-light px-1 py-2'>Asset</label>
-                            </div>
-                        </div>
-                    </div> */}
                     <div className="col-9">
                         <div className="tab-content" id="v-pills-tabContent">
                             <div className='py-2 container rounded mb-2 border-bottom' key={id}>
@@ -98,8 +95,9 @@ const UpdatePc = () => {
                                         <select className="form-control" id="exampleFormControlSelect1"
                                             value={disp} onChange={(e) => setDisp(e.target.value)}>
                                             <option value={"selected"}>Selecionar</option>
-                                            <option>Disponível</option>
-                                            <option>Indisponível</option>
+                                            <option>Estoque</option>
+                                            <option>Manutenção</option>
+                                            <option>Ativo</option>
                                         </select>
                                     </div>
                                 </div>
@@ -115,14 +113,36 @@ const UpdatePc = () => {
                                         <select className="form-control" id="exampleFormControlSelect1"
                                             value={status} onChange={(e) => setStatus(e.target.value)}>
                                             <option selected>Selecionar</option>
-                                            <option>Pronto para retirar</option>
-                                            <option>Em estoque</option>
-                                            <option>Com o field</option>
-                                            <option>Falta csv</option>
-                                            <option>Atualizar drivers</option>
-                                            <option>Instalar office</option>
+                                            <option>Em preparação</option>
+                                            <option>Garantia</option>
+                                            <option>Reservado</option>
+                                            <option>Em uso</option>
+                                            <option>Inativo</option>
                                             <option>Nenhum...</option>
                                         </select>
+                                        {status === "Garantia" ?
+                                            <>
+                                                <select className="form-control" id="exampleFormControlSelect1"
+                                                    value={garantia} onChange={(e) => setGarantia(e.target.value)}>
+                                                    <option selected>Selecionar</option>
+                                                    <option>Sim</option>
+                                                    <option>Não</option>
+                                                </select>
+                                            </>
+                                            : ""
+                                        }
+                                        {
+                                            status === "Reservado" ?
+                                                <>
+                                                    <select className="form-control" id="exampleFormControlSelect1"
+                                                        value={reservado} onChange={(e) => setReservado(e.target.value)}>
+                                                        <option selected>Selecionar</option>
+                                                        <option>Sim</option>
+                                                        <option>Não</option>
+                                                    </select>
+                                                </>
+                                                : ""
+                                        }
                                     </div>
                                     <div className="col pb-3">
                                         <label for="inputEmail4" className='text-light px-1 py-2'>Observação</label>

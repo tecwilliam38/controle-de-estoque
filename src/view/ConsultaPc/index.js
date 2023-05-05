@@ -19,6 +19,8 @@ const ConsultaPc = () => {
     const [disp, setDisp] = useState("");
     const [user, setUser] = useState("");
     const [status, setStatus] = useState("");
+    const [garantia, setGarantia] = useState("");
+    const [reservado, setReservado] = useState("");
     const [msg, setMsg] = useState("");
     const [data, setData] = useState([]);
     const [id, setId] = useState(0);
@@ -51,17 +53,17 @@ const ConsultaPc = () => {
         localStorage.setItem(id);
         localStorage.setItem(asset);
         localStorage.setItem(disp);
-        localStorage.setItem(msg)
-        localStorage.setItem(serviceTag)
-        localStorage.setItem(user)
-        localStorage.setItem(status)
+        localStorage.setItem(msg);
+        localStorage.setItem(serviceTag);
+        localStorage.setItem(user);
+        localStorage.setItem(status);
+        localStorage.setItem(reservado);
+        localStorage.setItem(garantia);
         console.log(item);
     };
 
     const searchToLower = search.toLowerCase();
     const result = data.find(pc => pc.asset.toLowerCase().includes(searchToLower));
-    const resultFilter = data.filter(pc => pc.asset.toLowerCase().includes(searchToLower));
-
     return (
         <>
             <div className='bg-login'>
@@ -111,8 +113,9 @@ const ConsultaPc = () => {
                                                 <select className="form-control" id="exampleFormControlSelect1"
                                                     value={"Selecionar"} onChange={(e) => setDisp(e.target.value)}>
                                                     <option value={"selected"}>Selecionar</option>
-                                                    <option>Disponível</option>
-                                                    <option>Indisponível</option>
+                                                    <option>Estoque</option>
+                                                    <option>Manutenção</option>
+                                                    <option>Ativo</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -125,16 +128,38 @@ const ConsultaPc = () => {
                                             <div className="col pb-3">
                                                 <label htmlFor="inputEmail4" className='text-light px-1 py-2'>Estado</label>
                                                 <select className="form-control" id="exampleFormControlSelect1"
-                                                    value={"Status"} onChange={(e) => setStatus(e.target.value)}>
+                                                    value={status} onChange={(e) => setStatus(e.target.value)}>
                                                     <option selected>Selecionar</option>
-                                                    <option>Pronto para retirar</option>
-                                                    <option>Em estoque</option>
-                                                    <option>Com o field</option>
-                                                    <option>Falta csv</option>
-                                                    <option>Atualizar drivers</option>
-                                                    <option>Instalar office</option>
+                                                    <option>Em preparação</option>
+                                                    <option>Garantia</option>
+                                                    <option>Reservado</option>
+                                                    <option>Em uso</option>
+                                                    <option>Inativo</option>
                                                     <option>Nenhum...</option>
                                                 </select>
+                                                {status === "Garantia" ?
+                                                    <>
+                                                        <select className="form-control" id="exampleFormControlSelect1"
+                                                            value={garantia} onChange={(e) => setGarantia(e.target.value)}>
+                                                            <option selected>Selecionar</option>
+                                                            <option>Sim</option>
+                                                            <option>Não</option>
+                                                        </select>
+                                                    </>
+                                                    : ""
+                                                }
+                                                {
+                                                    status === "Reservado" ?
+                                                        <>
+                                                            <select className="form-control" id="exampleFormControlSelect1"
+                                                                value={reservado} onChange={(e) => setReservado(e.target.value)}>
+                                                                <option selected>Selecionar</option>
+                                                                <option>Sim</option>
+                                                                <option>Não</option>
+                                                            </select>
+                                                        </>
+                                                        : ""
+                                                }
                                             </div>
                                             <div className="col pb-3">
                                                 <label htmlFor="inputEmail4" className='text-light px-1 py-2'>Observação</label>
@@ -161,8 +186,9 @@ const ConsultaPc = () => {
                                                 <select className="form-control" id="exampleFormControlSelect1"
                                                     value={result.disp} onChange={(e) => setDisp(e.target.value)}>
                                                     <option value={"selected"}>Selecionar</option>
-                                                    <option>Disponível</option>
-                                                    <option>Indisponível</option>
+                                                    <option>Estoque</option>
+                                                    <option>Manutenção</option>
+                                                    <option>Ativo</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -177,14 +203,36 @@ const ConsultaPc = () => {
                                                 <select className="form-control" id="exampleFormControlSelect1"
                                                     value={result.status} onChange={(e) => setStatus(e.target.value)}>
                                                     <option selected>Selecionar</option>
-                                                    <option>Pronto para retirar</option>
-                                                    <option>Em estoque</option>
-                                                    <option>Com o field</option>
-                                                    <option>Falta csv</option>
-                                                    <option>Atualizar drivers</option>
-                                                    <option>Instalar office</option>
+                                                    <option>Em preparação</option>
+                                                    <option>Garantia</option>
+                                                    <option>Reservado</option>
+                                                    <option>Em uso</option>
+                                                    <option>Inativo</option>
                                                     <option>Nenhum...</option>
                                                 </select>
+                                                {status === "Garantia" ?
+                                                    <>
+                                                        <select className="form-control" id="exampleFormControlSelect1"
+                                                            value={garantia} onChange={(e) => setGarantia(e.target.value)}>
+                                                            <option selected>Selecionar</option>
+                                                            <option>Sim</option>
+                                                            <option>Não</option>
+                                                        </select>
+                                                    </>
+                                                    : ""
+                                                }
+                                                {
+                                                    status === "Reservado" ?
+                                                        <>
+                                                            <select className="form-control" id="exampleFormControlSelect1"
+                                                                value={reservado} onChange={(e) => setReservado(e.target.value)}>
+                                                                <option selected>Selecionar</option>
+                                                                <option>Sim</option>
+                                                                <option>Não</option>
+                                                            </select>
+                                                        </>
+                                                        : ""
+                                                }
                                             </div>
                                             <div className="col pb-3">
                                                 <label htmlFor="inputEmail4" className='text-light px-1 py-2'>Observação</label>

@@ -18,6 +18,8 @@ const CadastroPc = () => {
     const [disp, setDisp] = useState("");
     const [user, setUser] = useState("");
     const [status, setStatus] = useState("");
+    const [garantia, setGarantia] = useState("");
+    const [reservado, setReservado] = useState("");
     const [msg, setMsg] = useState("");
 
     const handleCadastro = () => {
@@ -28,6 +30,8 @@ const CadastroPc = () => {
             serviceTag,
             user,
             status,
+            garantia,
+            reservado,
         })
         toast("Cadastro efetuado com sucesso!");
         setTimeout(() => {
@@ -61,8 +65,9 @@ const CadastroPc = () => {
                             <label for="inputEmail4" className='text-light px-1 py-2'>Disponibilidade</label>
                             <select className="form-control" id="exampleFormControlSelect1" value={disp} onChange={(e) => setDisp(e.target.value)}>
                                 <option value={"selected"}>Selecionar</option>
-                                <option>Disponível</option>
-                                <option>Indisponível</option>
+                                <option>Estoque</option>
+                                <option>Manutenção</option>
+                                <option>Ativo</option>
                             </select>
                         </div>
                     </div>
@@ -77,19 +82,41 @@ const CadastroPc = () => {
                             <select className="form-control" id="exampleFormControlSelect1"
                                 value={status} onChange={(e) => setStatus(e.target.value)}>
                                 <option selected>Selecionar</option>
-                                <option>Pronto para retirar</option>
-                                <option>Em estoque</option>
-                                <option>Com o field</option>
-                                <option>Falta csv</option>
-                                <option>Atualizar drivers</option>
-                                <option>Instalar office</option>
+                                <option>Em preparação</option>
+                                <option>Garantia</option>
+                                <option>Reservado</option>
+                                <option>Em uso</option>
+                                <option>Inativo</option>
                                 <option>Nenhum...</option>
                             </select>
+                            {status === "Garantia" ?
+                                <>
+                                    <select className="form-control" id="exampleFormControlSelect1"
+                                        value={garantia} onChange={(e) => setGarantia(e.target.value)}>
+                                        <option selected>Selecionar</option>
+                                        <option>Sim</option>
+                                        <option>Não</option>
+                                    </select>
+                                </>
+                                : ""
+                            }
+                            {
+                                status === "Reservado" ?
+                                    <>
+                                        <select className="form-control" id="exampleFormControlSelect1"
+                                            value={reservado} onChange={(e) => setReservado(e.target.value)}>
+                                            <option selected>Selecionar</option>
+                                            <option>Sim</option>
+                                            <option>Não</option>
+                                        </select>
+                                    </>
+                                    : ""
+                            }
                         </div>
                         <div className="col pb-3">
-                            <label for="inputEmail4" className='text-light col-12 px-1 py-2'>Observação</label>
+                            <label for="inputEmail4" className='text-light col-12 px-1 py-2'>Observação:</label>
                             <textarea type='text'
-                                rows={1} className='form-control' placeholder='Observação'
+                                rows={2} className='form-control' placeholder='Observação...'
                                 value={msg} onChange={(e) => setMsg(e.target.value)}
                                 maxLength={500}
                             />

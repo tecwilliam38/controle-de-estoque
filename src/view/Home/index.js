@@ -23,6 +23,8 @@ export default function Home() {
     const [disp, setDisp] = useState("");
     const [user, setUser] = useState("");
     const [status, setStatus] = useState("");
+    const [garantia, setGarantia] = useState("");
+    const [reservado, setReservado] = useState("");
     const [msg, setMsg] = useState("");
     const [data, setData] = useState([]);
     const [id, setId] = useState(0);
@@ -48,17 +50,19 @@ export default function Home() {
         toast("registro excluído com sucesso!");
         setTimeout(() => {
             navigate('/home', user);
-        }, 3000);
+        }, 1000);
     }
     const updatePcSelected = (item) => {
         const { asset, disp, msg, serviceTag, user, status } = data;
         localStorage.setItem(id);
         localStorage.setItem(asset);
         localStorage.setItem(disp);
-        localStorage.setItem(msg)
-        localStorage.setItem(serviceTag)
-        localStorage.setItem(user)
-        localStorage.setItem(status)
+        localStorage.setItem(msg);
+        localStorage.setItem(serviceTag);
+        localStorage.setItem(user);
+        localStorage.setItem(status);
+        localStorage.setItem(reservado);
+        localStorage.setItem(garantia);
         console.log(item);
     };
 
@@ -90,7 +94,15 @@ export default function Home() {
                                             <td>{pc.serviceTag}</td>
                                             <td>{pc.disp}</td>
                                             <td>{pc.user}</td>
-                                            <td>{pc.status}</td>
+                                            <td>{pc.status == "Reservado"
+                                                ? <div>Reservado: {pc.reservado}</div>
+                                                :
+                                                pc.status == "Garantia" ?
+                                                    <div>Garantia:  {pc.garantia} </div>
+                                                    : pc.status
+
+                                            }
+                                            </td>
                                             <td>{pc.msg}</td>
                                             <td className='row justify-content-center'>
                                                 <Link to={{ pathname: `/updatePc/${pc._id}` }} className='btn-class'>
